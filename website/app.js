@@ -4,6 +4,11 @@ let baseURL = 'https://api.openweathermap.org/data/2.5/weather?zip=';
 let apiKey = ',us&appid=73ce595a0ec8725af0a3bf9dfd38dcc4';
 
 
+function currentDate () {
+    let d = new Date();
+    let newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
+    return newDate
+};
 
 
 function action (e) {
@@ -13,11 +18,11 @@ function action (e) {
     getWeather(baseURL, zip, apiKey)
 
     .then(function (data) {
-        let d = new Date();
-        let temp = (data.main.temp - 273.15) * 1.8 + 32;
-        let newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
 
-        postData('/add', {temperature: temp.toFixed(2), date: newDate, feelings: feelings});
+        let temp = (data.main.temp - 273.15) * 1.8 + 32;
+
+
+        postData('/add', {temperature: temp.toFixed(2), date: currentDate(), feelings: feelings});
 
         updateUI()
     })
