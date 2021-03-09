@@ -22,12 +22,9 @@ function tempInFahrenheit (data) {
 function action (e) {
     let zip = document.getElementById('zip').value;
     let feelings = document.getElementById('feelings').value;
-
     getWeather(baseURL, zip, apiKey)
-
     .then(function (data) {
         postData('/add', {temperature: tempInFahrenheit(data), date: currentDate(), feelings: feelings});
-
         updateUI()
     })
 };
@@ -72,7 +69,6 @@ const updateUI = async () => {
       document.getElementById('date').innerHTML = latest.date;
       document.getElementById('temp').innerHTML = latest.temperature;
       document.getElementById('content').innerHTML = latest.userResponse;
-
     }catch(error){
       console.log("error", error);
     }
@@ -82,4 +78,3 @@ const updateUI = async () => {
 // EventListeners
 
 document.getElementById('generate').addEventListener('click', action);
-
