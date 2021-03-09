@@ -7,12 +7,20 @@ let apiKey = ',us&appid=73ce595a0ec8725af0a3bf9dfd38dcc4';
 let d = new Date();
 let newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
 
+// EventListeners
 document.getElementById('generate').addEventListener('click', action);
 
 function action (e) {
     let zip = document.getElementById('zip').value;
+    let feelings = document.getElementById('feelings').value;
+
     getWeather(baseURL, zip, apiKey)
-}
+
+    .then(function (data) {
+        console.log(data)
+        postData('add', )
+    });
+};
 
 const getWeather = async (baseURL, zip, apiKey) => {
     const res = await fetch(baseURL+zip+apiKey)
