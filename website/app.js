@@ -10,6 +10,11 @@ function currentDate () {
     return newDate
 };
 
+function tempInFahrenheit (data) {
+    let temp = (data.main.temp - 273.15) * 1.8 + 32;
+    return temp.toFixed(2)
+};
+
 
 function action (e) {
     let zip = document.getElementById('zip').value;
@@ -19,10 +24,10 @@ function action (e) {
 
     .then(function (data) {
 
-        let temp = (data.main.temp - 273.15) * 1.8 + 32;
 
 
-        postData('/add', {temperature: temp.toFixed(2), date: currentDate(), feelings: feelings});
+
+        postData('/add', {temperature: tempInFahrenheit(data), date: currentDate(), feelings: feelings});
 
         updateUI()
     })
