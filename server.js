@@ -32,7 +32,7 @@ const server = app.listen(port, () => {
 
 // GET All
 app.get('/all', (req, res) => {
-    res.send(projectData);
+    res.send(data);
 })
 
 // POST Data
@@ -42,8 +42,8 @@ app.post('/add', (req, res) => {
     let newEntry = {
         temperature: newData.temperature,
         date: newData.date,
-        userResponse: newData.userResponse
-    }
+        userResponse: newData.feelings
+    };
     data.push(newEntry);
     console.log(data);
 })
