@@ -3,12 +3,8 @@
 let baseURL = 'https://api.openweathermap.org/data/2.5/weather?zip=';
 let apiKey = ',us&appid=73ce595a0ec8725af0a3bf9dfd38dcc4';
 
-// Create a new date instance dynamically with JS
-let d = new Date();
-let newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
 
-// EventListeners
-document.getElementById('generate').addEventListener('click', action);
+
 
 function action (e) {
     let zip = document.getElementById('zip').value;
@@ -17,15 +13,17 @@ function action (e) {
     getWeather(baseURL, zip, apiKey)
 
     .then(function (data) {
-        postData('/add', {temperature: data.main.temp, date: data.dt, feelings: feelings});
+        let d = new Date();
+        let temp = (data.main.temp - 273.15) * 1.8 + 32;
+        let newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
+
+        postData('/add', {temperature: temp.toFixed(2), date: newDate, feelings: feelings});
 
         updateUI()
     })
-
-
-
-
 };
+
+
 
 const getWeather = async (baseURL, zip, apiKey) => {
     const res = await fetch(baseURL+zip+apiKey)
@@ -36,6 +34,7 @@ const getWeather = async (baseURL, zip, apiKey) => {
         console.log('error', error);
     }
 };
+
 
 const postData = async (url = '', data = {}) => {
     const response = await fetch(url, {
@@ -69,4 +68,7 @@ const updateUI = async () => {
     }
   }
 
+
+// EventListeners
+document.getElementById('generate').addEventListener('click', action);
 
