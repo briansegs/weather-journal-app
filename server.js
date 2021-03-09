@@ -14,6 +14,7 @@ app.use(express.json());
 
 // Cors for cross origin allowance
 const cors = require('cors');
+const { Router } = require('express');
 app.use(cors());
 
 // Initialize the main project folder
@@ -25,5 +26,10 @@ const port = 8080;
 
 const server = app.listen(port, () => {
     console.log(`server is running on localhost: ${port}`);
+})
+
+// Routes
+app.get('/all', (req, res) => {
+    res.send(projectData);
 })
 
