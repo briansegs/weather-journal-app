@@ -4,11 +4,14 @@ let baseURL = 'https://api.openweathermap.org/data/2.5/weather?zip=';
 let apiKey = ',us&appid=73ce595a0ec8725af0a3bf9dfd38dcc4';
 
 
+// Functions
+
 function currentDate () {
     let d = new Date();
     let newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
     return newDate
 };
+
 
 function tempInFahrenheit (data) {
     let temp = (data.main.temp - 273.15) * 1.8 + 32;
@@ -23,10 +26,6 @@ function action (e) {
     getWeather(baseURL, zip, apiKey)
 
     .then(function (data) {
-
-
-
-
         postData('/add', {temperature: tempInFahrenheit(data), date: currentDate(), feelings: feelings});
 
         updateUI()
@@ -34,6 +33,7 @@ function action (e) {
 };
 
 
+// Async Calls
 
 const getWeather = async (baseURL, zip, apiKey) => {
     const res = await fetch(baseURL+zip+apiKey)
@@ -76,9 +76,10 @@ const updateUI = async () => {
     }catch(error){
       console.log("error", error);
     }
-  }
+}
 
 
 // EventListeners
+
 document.getElementById('generate').addEventListener('click', action);
 
