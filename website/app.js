@@ -30,7 +30,7 @@ function action (e) {
 };
 
 
-// Async Calls
+// Async Functions
 
 const getWeather = async (baseURL, zip, apiKey) => {
     const res = await fetch(baseURL+zip+apiKey)
